@@ -5,7 +5,7 @@ const passport = require('passport');
 
 require('../_helpers/auth');
 
-// routes
+// Public routes
 
 userRouter
     .route('/register')
@@ -14,6 +14,8 @@ userRouter
 userRouter
     .route('/login')
     .post(loginUser)
+
+// Private Routes
 
 userRouter
     .route('/users', passport.authenticate('jwt', { session : false }))

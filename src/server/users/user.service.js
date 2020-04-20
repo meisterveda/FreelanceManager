@@ -8,7 +8,7 @@ dotenv.config({ path: './config/config.env' });
 const secret = process.env.SECRET;
 
 
-// @desc    get all Users
+// @desc    Get all Users
 // @route   GET /api/v1/users/users
 // @access  private
 exports.getUsers = async (req, res, next) => {
@@ -26,6 +26,20 @@ exports.getUsers = async (req, res, next) => {
             error: 'Server Error'
         });
     }
+}
+
+// @desc    Delete User
+// @route   DELETE /api/v1/users/delete
+// @access  private
+exports.deleteUser = async (req, res, next) => {
+
+}
+
+// @desc    Update User
+// @route   UPDATE /api/v1/users/update
+// @access  private
+exports.updateUser = async (req, res, next) => {
+    
 }
 
 // @desc    Add User
@@ -74,7 +88,7 @@ exports.addUser = async (req, res, next) => {
     }
 }
 
-// @desc    login User
+// @desc    Login User
 // @route   POST /api/v1/users/login
 // @access  public
 
@@ -110,6 +124,8 @@ exports.loginUser = async (req, res, next) => {
     }
 }
 
+// Create passport middleware to handle User Login
+// We are using a local strategy and also we serialize and deserialize the users.
 
 function passportLogin() {
     passport.use(new LocalStrategy(async (username, password, done) => {

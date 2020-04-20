@@ -1,0 +1,58 @@
+* [ ] Dashboard
+* [ ] JobBoard Search - Job boards - Jobs Details
+* [ ] MessageBoard - Inbox - sent messages
+* [ ] ProjectBoard - Board - Manager - Project Details - Create Project
+* [ ] About - Page
+* [ ] Administration
+
+app
+
+- components
+    - layouts
+        - default
+    - shared
+        - blocks
+            - header
+            - footer
+            - navbar
+        - widgets
+            - table
+    - modules
+        - dashboard
+            - dashboard
+        - jobs
+            - board
+            - earch
+            - details
+        - messages
+            - board
+            - inbox
+            - sent
+            - details
+        - projects
+            - board
+            - manager
+            - details
+            - create
+        - Administration
+        - settings
+        - userprofile
+    - pages
+        - about
+        - help
+- models
+    - Jobs
+    - messages
+    - projects
+    - settings
+    - Administration
+    - server
+    - Git
+- services
+    - Jobs
+    - messages
+    - projects
+    - settings
+    - Administration
+    - server
+    - Git

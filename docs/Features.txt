@@ -1,0 +1,25 @@
+Basic Information
+
+Name: Freelance Manager
+Type: MEAN stack
+
+Features
+
+Server:
+
+* [ ] Create projects
+* [ ] Create files and folders
+* [ ] Create GitHub project
+* [ ] Create Gitlab project
+* [ ] Create Gitlab CI/CD file
+* [ ] Create files from templates
+* [ ] Create statistics and reports
+
+App:
+
+* [ ] Dashboard
+* [ ] JobBoard Search - Job boards - Jobs Details
+* [ ] MessageBoard - Inbox - sent messages
+* [ ] ProjectBoard - Board - Manager - Project Details - Create Project
+* [ ] About - Page
+* [ ] Administration

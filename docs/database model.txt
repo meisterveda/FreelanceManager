@@ -1,0 +1,61 @@
+Database Model
+
+Users:
+
+- Username : string
+- Email: string
+- Name: string
+- Roles : [string]
+
+Roles:
+
+- Name : string
+- projectadmin: boolean
+- reportAdmin: boolean
+- view: boolean
+- TechnologyAdmin: boolean
+- GitAdmin: boolean
+- UserAdmin: boolean
+- TemplatesAdmin: boolean
+
+Projects:
+
+- Name : string
+- Description: string
+- Technology: string
+- Create by : string
+- Time of Creation: date
+- Last Modified by: string
+- Administrator: string
+- Git Name: string
+
+Git:
+
+- Name: string
+- url: string
+- api: string
+- Key: string
+
+Settings:
+
+- 
+
+Reports:
+
+- 
+
+File Templates:
+
+- Name : string
+- Description: string
+- body: string
+- File Type: string
+- Parent: string
+- SecondaryParent: string
+- Location: string
+
+Technology:
+
+- Name: string
+- extension: string
+- Files: [string]
