@@ -1,0 +1,26 @@
+FROM node:10
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+ENV PATH="./node_modules/.bin:$PATH"
+
+RUN npm install
+RUN npm install -g @angular/cli
+# If you are building your code for production
+# RUN npm ci --only=production
+
+
+
+# Bundle app source
+COPY . .
+
+EXPOSE 4200
+
+CMD [ "ng", "serve" ]
+

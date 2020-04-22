@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,10 +21,10 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
   ) { 
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) { 
+    if (this.authService.currentUserValue) { 
         this.router.navigate(['/']);
     }
 }
@@ -51,13 +51,14 @@ onSubmit() {
     }
 
     this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authService.login(this.f.username.value, this.f.password.value)
         .pipe(first())
         .subscribe(
             data => {
                 this.router.navigate([this.returnUrl]);
             },
             error => {
+                console.log(this.error);
                 this.error = error;
                 this.loading = false;
             });

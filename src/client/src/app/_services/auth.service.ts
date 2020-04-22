@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
   
@@ -23,11 +23,15 @@ export class AuthenticationService {
    }
 
    login(username: string, password: string) {
-     return this.http.post<any>(`${environment.apiUrl}/api/v1/users/login`, {username, password })
+     return this.http.post<User>(`${environment.apiUrl}/api/v1/users/login`, { username, password })
           .pipe(map(user => {
-            // Store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+            if (user && user.token) {
+              console.log(user);
+                // Store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+            }
+            
             return user;
           }));
    }

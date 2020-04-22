@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +13,13 @@ export class HeaderComponent {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
   ) { 
-    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.authService.logout();
     this.router.navigate(['/login']);
     return false;
   }

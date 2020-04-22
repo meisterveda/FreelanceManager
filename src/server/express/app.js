@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const passport = require('passport');
-import Cors from 'cors';
+const cors = require('cors');
 
 const errorHandler = require('../_helpers/error-handler');
 
@@ -11,24 +11,21 @@ dotenv.config({ path: './config/config.env' });
 const port = process.env.PORT;
 
 const userRouter = require('../users/users.controller');
-
-const corsOptions = {
-    origin: (origin, callback) => {
-      if (whitelist.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    optionsSuccessStatus: 200,
-  };
   
 
 module.exports = {
     HttpServer : function() {
 
         app.use(express.json());
-        app.use(Cors(corsOptions));
+
+        // Fix for CORS Error, must route differently
+        /* app.use((req, res, next) => {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+            res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+            next();
+        }) */
+        app.use(cors());
 
         // global error handler
         app.use(errorHandler);

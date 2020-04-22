@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     this.loading = true;
     this.userService.getallUsers().pipe(first()).subscribe(users => {
       this.loading = false;
-      this.users = users;
+      this.users = users['data'];
     });
   }
 
