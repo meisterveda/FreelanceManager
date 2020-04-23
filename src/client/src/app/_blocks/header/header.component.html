@@ -1,7 +1,6 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
+    <mat-toolbar-row color="primary">
         <a routerLink="/" mat-button>APP Logo</a>
-        
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li>
@@ -19,17 +18,49 @@
                         <mat-icon>person_outline</mat-icon>
                     </a>
                 </li>
-                <li *ngIf="isLoggedOut | async as isLoggedOut">
-                    <a routerLink="/login" mat-icon-button>
+                <li *ngIf="!(isLoggedIn$ | async) as isLoggedIn">
+                    <a *ngIf="isLoggedIn" routerLink="/login" mat-icon-button>
                         <mat-icon>exit_to_app</mat-icon>
                     </a>
                 </li >    
-                <li *ngIf="isLoggedIn$ | async as isLoggedIn">
-                    <a (click)='logout()' mat-icon-button>
+                <li *ngIf="(isLoggedIn$ | async) as isLoggedIn">
+                    <a *ngIf="isLoggedIn" (click)='logout()' mat-icon-button>
                         <mat-icon>exit_to_app</mat-icon>
                     </a>
                 </li>
             </ul>
         </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <nav>
+            <div fxFlex fxLayout="row" fxLayoutAlign="flex-start"> 
+                <ul fxLayout="row" fxLayoutGap="5px">
+                    <li>
+                        <a routerLink="/" mat-raised-button>Home</a>
+                    </li>
+                    <li>
+                        <a routerLink="/about" mat-raised-button >About Us</a>
+                    </li>
+                    <li>
+                        <a *ngIf="isLogged" routerLink="/dashboard" mat-raised-button>Dashboard</a>
+                    </li>
+                    <li>
+                        <a *ngIf="isLogged" routerLink="/jobs" mat-raised-button>Jobs</a>
+                    </li>
+                    <li>
+                        <a *ngIf="isLogged" routerLink="/messages" mat-raised-button>Messages</a>
+                    </li>
+                    <li>
+                        <a *ngIf="isLogged" routerLink="/projects" mat-raised-button>Projects</a>
+                    </li>
+                    <li>
+                        <a *ngIf="isLogged && isAdmin" routerLink="/admin" mat-raised-button>Administration</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
     </mat-toolbar-row>
 </mat-toolbar>

@@ -110,9 +110,15 @@ exports.loginUser = async (req, res, next) => {
                     res.send(err);
                 }
                 const body = {_id: user._id, username: user.username };
-                const token = jwt.sign({ user: body }, secret);
+                const token = jwt.sign({ user: body }, secret, { expiresIn: 604800 });
+                const userData = { username: user.username, token: token, role: user.role }
     
-                return res.json({token});
+                // return res.json({token});
+
+                return res.status(201).json({
+                    success: true,
+                    data: userData
+                });
             });
         })
         (req, res);

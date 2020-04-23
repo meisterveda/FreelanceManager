@@ -39,14 +39,12 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    console.log('auth login started');
-    console.log(username, password);
+
     return this.http.post<User>(`${environment.apiUrl}/api/v1/users/login`, { username, password })
         .pipe(map(user => {
-          console.log('inside the return')
-          if (user && user.token) {
+          if (user['success'] && user['data'].token) {
               // Store user details and jwt token in local storage to keep user logged in between page refreshes
-              localStorage.setItem('currentUser', JSON.stringify(user));
+              localStorage.setItem('currentUser', JSON.stringify(user['data']));
               this.currentUserSubject.next(user);
               this.loggedIn.next(true);
           }
@@ -65,24 +63,3 @@ export class AuthService {
 
 
 }
-
-
-    /* this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-        return;
-    }
-
-    this.loading = true;
-    this.authService.login(this.f.username.value, this.f.password.value)
-        .pipe(first())
-        .subscribe(
-            data => {
-                this.router.navigate([this.returnUrl]);
-            },
-            error => {
-                console.log(this.error);
-                this.error = error;
-                this.loading = false;
-            }); */
