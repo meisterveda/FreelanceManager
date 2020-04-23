@@ -13,6 +13,9 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String
     },
+    role: {
+        type: String
+    },
     createdDate: {
         type: Date,
         default: Date.now

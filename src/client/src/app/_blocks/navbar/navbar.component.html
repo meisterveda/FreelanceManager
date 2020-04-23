@@ -2,11 +2,14 @@
     <mat-toolbar-row>
         <nav>
             <div xFlex fxLayout="row" fxLayoutAlign="flex-start" fxLayoutGap="5px"> 
-                <a routerLink="/dashboard" mat-raised-button>Dashboard</a>
-                <a routerLink="/jobs" mat-raised-button >Jobs</a>
-                <a routerLink="/messages" mat-raised-button >Messages</a>
-                <a routerLink="/projects" mat-raised-button >Projects</a>
-                <a routerLink="/admin" mat-raised-button >Administration</a>
+                <a routerLink="/home" mat-raised-button>Home</a>
+                <ng-container *ngIf="isLoggedIn$ | async as isLoggedIn">
+                    <a *ngIf="isLoggedIn" routerLink="/dashboard" mat-raised-button>Dashboard</a>
+                    <!-- *ngIf="isLogged" --> <a  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="/jobs" mat-raised-button >Jobs</a>
+                    <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="/messages" mat-raised-button >Messages</a>
+                    <a [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="/projects" mat-raised-button >Projects</a>
+                    <a *ngIf="isAdmin" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="/admin" mat-raised-button >Administration</a>
+                </ng-container>
                 <a routerLink="/about" mat-raised-button >About Us</a>
             </div>
         </nav>

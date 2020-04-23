@@ -7,11 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { BlocksModule } from './_blocks/blocks.module';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
@@ -56,7 +61,17 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSidenavModule,
-    HttpClientModule
+    MatToolbarModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -65,3 +80,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}

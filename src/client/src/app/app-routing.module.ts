@@ -13,6 +13,7 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { LoginComponent } from './modules/login/login.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { UserRole } from './_models/user-role.enum';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'jobs', component: JobsComponent, canActivate: [AuthGuard] },
   { path: 'messages', component: MessagesComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdministrationComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdministrationComponent, canActivate: [AuthGuard], data: { roles: [UserRole.Admin] } },
   { path: 'about', component: AboutComponent },
   { path: 'help', component: HelpComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },

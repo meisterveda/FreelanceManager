@@ -19,7 +19,12 @@
                         <mat-icon>person_outline</mat-icon>
                     </a>
                 </li>
-                <li>
+                <li *ngIf="isLoggedOut | async as isLoggedOut">
+                    <a routerLink="/login" mat-icon-button>
+                        <mat-icon>exit_to_app</mat-icon>
+                    </a>
+                </li >    
+                <li *ngIf="isLoggedIn$ | async as isLoggedIn">
                     <a (click)='logout()' mat-icon-button>
                         <mat-icon>exit_to_app</mat-icon>
                     </a>

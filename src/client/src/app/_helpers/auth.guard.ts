@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 
 
@@ -13,15 +15,22 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService
   ) { }
   
-  canActivate(router: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserValue;
-    if (currentUser) {
-      // logged in so return true
-      return true;
-    }
+        if (currentUser) {
+            // check if route is restricted by role
+            if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
+                // role not authorised so redirect to home page
+                this.router.navigate(['/']);
+                return false;
+            }
+ 
+            // authorised so return true
+            return true;
+        }
 
-    // not logged in so redirect to login page with return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false;
+        // not logged in so redirect to login page with the return url
+        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+        return false;
   }
 }

@@ -48,7 +48,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.addUser = async (req, res, next) => {
     try {
-        const { username, password, email } = req.body;
+        const { username, password, email, role } = req.body;
 
         // check if user exists
         if ( await UserModel.findOne({ username: username})) {
@@ -61,7 +61,8 @@ exports.addUser = async (req, res, next) => {
         const newUser = new UserModel({
             username,
             password,
-            email
+            email,
+            role
         });
 
         // save new user
